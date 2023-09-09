@@ -1,7 +1,7 @@
 import os
 from googleapiclient.discovery import build
 from helper.youtube_api_manual import printj
-api_key: str = "AIzaSyDzWMCtRnkwIfUSTbjvN9fuPnT2DVNTz1I"
+
 
 class Channel:
     """Класс для ютуб-канала"""
@@ -12,7 +12,7 @@ class Channel:
 
     def print_info(self):
         """Выводит в консоль информацию о канале."""
-
+        api_key: str = os.getenv('YT_API_KEY')
         youtube = build('youtube', 'v3', developerKey=api_key)
         channel = youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
 
