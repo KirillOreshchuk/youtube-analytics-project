@@ -24,13 +24,41 @@ class Channel:
         self.video_count = int(channel["items"][0]["statistics"]["videoCount"])
         self.view_count = int(channel["items"][0]["statistics"]["viewCount"])
 
+    def __str__(self) -> str:
+        """ отображает информацию об объекте класса"""
+        return f"{self.title}({self.url})"
+
+    def __add__(self, other) -> int:
+        """ складывет количество подписчиков канала"""
+        return self.subscriber_count + other.subscriber_count
+
+    def __sub__(self, other) -> int:
+        """ вычитает количество подписчиков канала"""
+        return self.subscriber_count - other.subscriber_count
+
+    def __gt__(self, other) -> bool:
+        """ возвращает резуллльтат сравнения больше"""
+        return self.subscriber_count > other.subscriber_count
+
+    def __ge__(self, other) -> bool:
+        """ возвращает результат сравнения больше или равно"""
+        return self.subscriber_count >= other.subscriber_count
+
+    def __lt__(self, other) -> bool:
+        """ возвращает результат сравнения меньше"""
+        return self.subscriber_count < other.subscriber_count
+
+    def __le__(self, other) -> bool:
+        """ возвращает результат сравнения меньше или равно"""
+        return self.subscriber_count <= other.subscriber_count
+
     @classmethod
     def get_service(cls):
         """возвращает объект для работы с YouTube API"""
         return youtube
 
     @property
-    def channel_id(self):
+    def channel_id(self) -> str:
         return self.__channel_id
 
     def print_info(self):
